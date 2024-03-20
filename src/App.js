@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
     const [input, setInput] = useState("");
@@ -6,6 +6,20 @@ function App() {
         "pagar a conta de luz",
         "estudar react js"
     ]);
+
+
+    useEffect(()=>{
+      const tarefaStorege = localStorage.getItem("@tarefas")
+
+      if(tarefaStorege){
+        setTarefas(JSON.parse(tarefaStorege))
+      }
+    }, [])
+
+    useEffect(()=>{
+      localStorage.setItem("@tarefas", JSON.stringify(tarefas))
+    }, [tarefas])
+
 
   function handleSubmit(e) {
     e.preventDefault();
