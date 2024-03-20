@@ -2,26 +2,56 @@ import Name from "./componentes/Name";
 import { useState } from "react";
 
 function App() {
-  const [aluno, setAluno] = useState("Sujeito programador")
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [idade, setIdade] = useState("");
 
-  function hancleChange(){
-    setAluno("mateus")
+
+  const [user, setUser] = useState({})
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    alert("oi")
+
+    setUser({
+      nome: nome,
+      idade: idade,
+      email: email
+    })
   }
 
   return (
     <div>
-      <h1>
-        componente App
-      </h1>
-      <br/>
-      <h2>olá: {aluno}</h2>
-      <br/>
-      <button onClick={hancleChange}>
-        aperta
-      </button>
-      <Name aluno="lucas" idade="18"/>
-      <br />
-      <Name aluno="joao" idade="23"/>
+      <form onSubmit={handleSubmit}>
+        <label>Nome:</label><br/>
+        <input 
+        placeholder="Digite o Nome"
+        value={nome}
+        onChange={ (e) => setNome(e.target.value) }></input><br/>
+
+        <label>Email:</label><br/>
+        <input 
+        placeholder="Digite o Email"
+        value={email}
+        onChange={ (e) => setEmail(e.target.value) }></input><br/>
+
+        <label>Idade:</label><br/>
+        <input 
+        placeholder="Digite o Idade"
+        value={idade}
+        onChange={ (e) => setIdade(e.target.value) }></input><br/><br/>
+
+        <button type="submit">Registrar-se</button>
+      </form>
+
+      <br/><br/>
+      
+      <div>
+        <span>Bem vindo: {user.nome}</span><br/>
+        <span>Idade: {user.idade}</span><br/>
+        <span>Email: {user.email}</span>
+      </div>
     </div>
   );
 }
