@@ -7,20 +7,26 @@ import { useState, useEffect } from "react";
 function App() {
 
 
-  const [ bannerImg, setBannerImg ] = useState([])
+  const [bannerImg, setBannerImg] = useState([])
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
       .then(res => res.json())
-      .then(json => setBannerImg(json.map((item, id) => {return {src: item.image, id: item.id}})))
+      .then(json => setBannerImg(json.map((item, id) => { return { src: item.image, id: item.id } })))
   }, [])
 
-console.log(bannerImg)
+  console.log(bannerImg)
 
   return (
 
     <div>
       <Carousel data={carouselData} />
+      <div className="my-4">
+        <h1 className="text-center text-5xl">
+          Hello World
+        </h1>
+        <button className="btn btn-lg btn-outline m-auto block my-4 hover:bg-red-950">Salvar</button>
+      </div>
     </div>
   );
 }
