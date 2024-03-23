@@ -1,50 +1,26 @@
+import "./App.css";
+import Carousel from "./componentes/carousel/carousel";
+import carouselData from "./APIs/carouselData.json"
 import { useState, useEffect } from "react";
 
+
 function App() {
-    const [input, setInput] = useState("");
-    const [tarefas, setTarefas] = useState([
-        "pagar a conta de luz",
-        "estudar react js"
-    ]);
 
 
-    useEffect(()=>{
-      const tarefaStorege = localStorage.getItem("@tarefas")
+  const [ bannerImg, setBannerImg ] = useState([])
 
-      if(tarefaStorege){
-        setTarefas(JSON.parse(tarefaStorege))
-      }
-    }, [])
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/products')
+      .then(res => res.json())
+      .then(json => setBannerImg(json.map((item, id) => {return {src: item.image, id: item.id}})))
+  }, [])
 
-    useEffect(()=>{
-      localStorage.setItem("@tarefas", JSON.stringify(tarefas))
-    }, [tarefas])
-
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    setTarefas([...tarefas, input])
-    setInput("");
-  }
+console.log(bannerImg)
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>Nome da tarefa:</label><br/>
-        <input 
-        placeholder="Digite o Nome"
-        value={input}
-        onChange={ (e) => setInput(e.target.value) }></input><br/>
 
-        <button type="submit">Registrar-se</button>
-      </form>
-      <br/><br/>
-      <div>
-        {tarefas.map( tarefa => (
-            <li key={tarefa}>{tarefa}</li>
-        ))}
-      </div>
+    <div>
+      <Carousel data={carouselData} />
     </div>
   );
 }
