@@ -25,7 +25,7 @@ function App() {
         <h1 className="text-center text-5xl">
           Hello World
         </h1>
-        <button className="btn btn-lg btn-outline m-auto block my-4 hover:bg-red-950">Salvar</button>
+        <button className="btn btn-lg btn-outline m-auto block my-4 hover:bg-orange-brastemp">Salvar</button>
       </div>
     </div>
   );
